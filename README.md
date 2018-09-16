@@ -38,3 +38,8 @@ php -f tester ./ -c php.ini-mac --coverage coverage.html --coverage-src ../src
 MIT License (c) Pavol Biely
 
 Read the provided LICENSE file for details.
+
+# Links
+- [API reference](https://support.ladesk.com/docs/api/v3/)
+- [Official REST API docs](https://support.ladesk.com/066804-LiveAgent-API)
+- [Official website](https://www.ladesk.com)
