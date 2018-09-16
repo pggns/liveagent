@@ -8,21 +8,21 @@ class LiveAgentApi
 	const TICKET_ATTRIBUTE_ENDCHAORCALL = 'endChatOrCall';
 	const TICKET_ATTRIBUTE_NOTE = 'note';
 
-    /** @var string */
-    protected $apiUrl;
+	/** @var string */
+	protected $apiUrl;
 
-    /** @var string */
-    protected $apiKey;
+	/** @var string */
+	protected $apiKey;
 
-    /**
+	/**
 	 * @param string
 	 * @param string
-     */
-    public function __construct(string $apiUrl, string $apiKey)
-    {
-        $this->apiUrl = $apiUrl;
-        $this->apiKey = $apiKey;
-    }
+	 */
+	public function __construct(string $apiUrl, string $apiKey)
+	{
+		$this->apiUrl = $apiUrl;
+		$this->apiKey = $apiKey;
+	}
 
 	/**
 	 * List of agents
@@ -48,7 +48,7 @@ class LiveAgentApi
 		]);
 	}
 
-    /**
+	/**
 	 * List of online agents with their activity status (A - Available, B - Busy) and open tickets.
 	 * @param int Page to display. Not used if $from is defined.
 	 * @param int Results per page. Used only if $page is used.
@@ -58,7 +58,7 @@ class LiveAgentApi
 	 * @param int Result set start. Takes precedence over $page.
 	 * @param int Result set end. Used only if $from is used.
 	 * @return \stdClass
-     */
+	 */
 	public function getAgentsActivity(int $page = 1, int $itemsPerPage = 10, string $sortDir = 'ASC', string $sortField = null, array $filters = [], int $from = null, int $to = null): \stdClass
 	{
 		return $this->sendRequest('GET', 'agents/activity', [
@@ -427,7 +427,7 @@ class LiveAgentApi
 	 * @param string
 	 * @return \stdClass
 	 */
-	public function getDeviceDepartmentsPlan(int $deviceId, string $departmentId ): \stdClass
+	public function getDeviceDepartmentsPlan(int $deviceId, string $departmentId): \stdClass
 	{
 		return $this->sendRequest('GET', 'devices/' . $deviceId . '/departments/' . $departmentId . '/plans');
 	}
@@ -834,39 +834,39 @@ class LiveAgentApi
 	 * @return \stdClass
 	 */
 	protected function sendRequest(string $method, string $type, array $data = []): \stdClass
-    {
-        $curl = curl_init();
+	{
+		$curl = curl_init();
 
-        $options = [
-            CURLOPT_RETURNTRANSFER => 1,
-            CURLOPT_URL => $this->apiUrl . '/' . $type . ($method == 'GET' ? '?' . http_build_query($data) : null),
-            CURLOPT_HTTPHEADER => [
-                'Content-Type: application/x-www-form-urlencoded',
-                'apikey: ' . $this->apiKey
-            ],
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_POSTFIELDS => $method === 'GET' ? [] : json_encode($data),
-        ];
-        curl_setopt_array($curl, $options);
+		$options = [
+			CURLOPT_RETURNTRANSFER => 1,
+			CURLOPT_URL => $this->apiUrl . '/' . $type . ($method == 'GET' ? '?' . http_build_query($data) : null),
+			CURLOPT_HTTPHEADER => [
+				'Content-Type: application/x-www-form-urlencoded',
+				'apikey: ' . $this->apiKey
+			],
+			CURLOPT_CUSTOMREQUEST => $method,
+			CURLOPT_POSTFIELDS => $method === 'GET' ? [] : json_encode($data),
+		];
+		curl_setopt_array($curl, $options);
 
-        if (($response = curl_exec($curl)) === false) {
-            throw new \RuntimeException(curl_error($curl), curl_errno($curl));
-        }
+		if (($response = curl_exec($curl)) === false) {
+			throw new \RuntimeException(curl_error($curl), curl_errno($curl));
+		}
 
-        $json = (object) json_decode($response);
-        if (($error = json_last_error()) !== JSON_ERROR_NONE) {
-            throw new \RuntimeException('Invalid JSON response.', $error);
-        }
+		$json = (object)json_decode($response);
+		if (($error = json_last_error()) !== JSON_ERROR_NONE) {
+			throw new \RuntimeException('Invalid JSON response.', $error);
+		}
 
-        if (($code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) !== 200) {
-            throw new \RuntimeException($json->message, $code);
-        }
+		if (($code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) !== 200) {
+			throw new \RuntimeException($json->message, $code);
+		}
 
-        if (isset($json->response->status) && $json->response->status == 'ERROR') {
-            throw new \RuntimeException($json->response->errormessage);
-        }
+		if (isset($json->response->status) && $json->response->status == 'ERROR') {
+			throw new \RuntimeException($json->response->errormessage);
+		}
 
-        curl_close($curl);
-        return (object) $json;
-    }
+		curl_close($curl);
+		return (object)$json;
+	}
 }

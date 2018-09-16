@@ -93,7 +93,7 @@ class Ticket
 	 */
 	public function setSubject(string $subject): self
 	{
-		$this->subject = (string) $subject;
+		$this->subject = (string)$subject;
 		return $this;
 	}
 
@@ -111,7 +111,7 @@ class Ticket
 	 */
 	public function setMessage(string $message): self
 	{
-		$this->message = (string) $message;
+		$this->message = (string)$message;
 		return $this;
 	}
 
@@ -129,7 +129,7 @@ class Ticket
 	 */
 	public function setRecipient(string $recipient): self
 	{
-		$this->recipient = (string) $recipient;
+		$this->recipient = (string)$recipient;
 		return $this;
 	}
 
@@ -165,7 +165,7 @@ class Ticket
 	 */
 	public function setUserIdentifier(string $userIdentifier): self
 	{
-		$this->userIdentifier = (string) $userIdentifier;
+		$this->userIdentifier = (string)$userIdentifier;
 		return $this;
 	}
 
@@ -183,7 +183,7 @@ class Ticket
 	 */
 	public function setDepartmentId(string $departmentId): self
 	{
-		$this->departmentId = (string) $departmentId;
+		$this->departmentId = (string)$departmentId;
 		return $this;
 	}
 
@@ -201,7 +201,7 @@ class Ticket
 	 */
 	public function setStatus(string $status): self
 	{
-		$this->status = (string) $status;
+		$this->status = (string)$status;
 		return $this;
 	}
 
@@ -420,17 +420,17 @@ class Ticket
 
 		// optional
 		foreach ([
-			'attachments' => $this->attachments ? implode(',', $this->getAttachments()) : null,
-			'carbon_copy' => $this->getCc(),
-			'date_created' => $this->dateCreated ? $this->getDateCreated()->format('r') : null,
-			'do_not_send_mail' => $this->doNotSendEmail ? 'Y' : 'N',
-			'is_html_message' => $this->isHtmlMessage ? 'Y' : 'N',
-			'mail_message_id' => $this->getMailMessageId(),
-			'recipient_name' => $this->getRecipientName(),
-			'status' => $this->getStatus(),
-			'tags' => $this->tags ? $this->getTags() : null,
-			'use_template' => $this->useTemplate ? 'Y' : 'N',
-		] as $key => $value) {
+					 'attachments' => $this->attachments ? implode(',', $this->getAttachments()) : null,
+					 'carbon_copy' => $this->getCc(),
+					 'date_created' => $this->dateCreated ? $this->getDateCreated()->format('r') : null,
+					 'do_not_send_mail' => $this->doNotSendEmail ? 'Y' : 'N',
+					 'is_html_message' => $this->isHtmlMessage ? 'Y' : 'N',
+					 'mail_message_id' => $this->getMailMessageId(),
+					 'recipient_name' => $this->getRecipientName(),
+					 'status' => $this->getStatus(),
+					 'tags' => $this->tags ? $this->getTags() : null,
+					 'use_template' => $this->useTemplate ? 'Y' : 'N',
+				 ] as $key => $value) {
 			if ($value) {
 				$data[$key] = $value;
 			}
