@@ -18,8 +18,30 @@ Use composer to install this package.
 Create a new LiveAgentAPI client instance
 ```php
 $la = new QualityUnit\LiveAgentApi('https://yourliveagantdomain.com/api/v3', 'api_key');
+```
 
+Create new Ticket via LiveAgentAPI client instance
+```php
 $ticket = new QualityUnit\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org');
+
+print_r($la->createTicket($ticket));
+```
+
+Create new File
+```php
+$file = new QualityUnit\File('path/to/file.txt');
+
+print_r($la->createFile($file));
+```
+
+Create new Ticket and add a file as an attachment
+```php
+$ticket = new QualityUnit\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org');
+
+$file = new QualityUnit\File('path/to/file.txt');
+$attachment = $la->crewateFile($file);
+
+$ticket->addAttachment($attachment->id);
 
 print_r($la->createTicket($ticket));
 ```
