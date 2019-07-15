@@ -39,7 +39,7 @@ Create new Ticket and add a file as an attachment
 $ticket = new QualityUnit\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org');
 
 $file = new QualityUnit\File('path/to/file.txt');
-$attachment = $la->crewateFile($file);
+$attachment = $la->createFile($file);
 
 $ticket->addAttachment($attachment->id);
 
