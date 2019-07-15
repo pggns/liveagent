@@ -5,7 +5,7 @@
 
 This is an unofficial LiveAgent API v3 PHP Client. QualityUnit does not provide official one yet.
 
-**This is still an unstable development version. Currently only all GET requests are implemented and one POST to create a ticket. Feel free to contribute and add any missing requests.**
+**This is still an unstable development version. Currently only all GET requests are implemented and POST to create a ticket and a file. Feel free to contribute and add any missing requests.**
 
 ![LiveAgent Logo](https://www.ladesk.com/fileadmin/templates/less/img/la-logo.svg)
 
