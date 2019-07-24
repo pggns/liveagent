@@ -47,9 +47,12 @@ print_r($la->createTicket($ticket));
 ```
 
 ## How to run tests?
-Tests are build with [Nette Tester](https://tester.nette.org/). You can run it like this:
+Tests are build with [Nette Tester](https://tester.nette.org/). You can run it like this (inside of php container)
 ```bash
-php -f tester ./ -c php.ini-mac --coverage coverage.html --coverage-src ../src
+$ docker-compose up -d
+$ docker-compose exec php bash
+$ cd tests
+$ php -f tester ./ -C --coverage coverage.html --coverage-src ../src
 ```
 
 ## Minimum requirements
