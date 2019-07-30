@@ -5,7 +5,7 @@
 
 This is an unofficial LiveAgent API v3 PHP Client. QualityUnit does not provide official one yet.
 
-**This is still an unstable development version. Currently only all GET requests are implemented and one POST to create a ticket. Feel free to contribute and add any missing requests.**
+**This is still an unstable development version. Currently only all GET requests are implemented and POST to create a ticket and a file. Feel free to contribute and add any missing requests.**
 
 ![LiveAgent Logo](https://www.ladesk.com/fileadmin/templates/less/img/la-logo.svg)
 
@@ -18,16 +18,41 @@ Use composer to install this package.
 Create a new LiveAgentAPI client instance
 ```php
 $la = new QualityUnit\LiveAgentApi('https://yourliveagantdomain.com/api/v3', 'api_key');
+```
 
+Create new Ticket via LiveAgentAPI client instance
+```php
 $ticket = new QualityUnit\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org');
 
 print_r($la->createTicket($ticket));
 ```
 
+Create new File
+```php
+$file = new QualityUnit\File('path/to/file.txt');
+
+print_r($la->createFile($file));
+```
+
+Create new Ticket and add a file as an attachment
+```php
+$ticket = new QualityUnit\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org');
+
+$file = new QualityUnit\File('path/to/file.txt');
+$attachment = $la->createFile($file);
+
+$ticket->addAttachment($attachment->id);
+
+print_r($la->createTicket($ticket));
+```
+
 ## How to run tests?
-Tests are build with [Nette Tester](https://tester.nette.org/). You can run it like this:
+Tests are build with [Nette Tester](https://tester.nette.org/). You can run it like this (inside of php container)
 ```bash
-php -f tester ./ -c php.ini-mac --coverage coverage.html --coverage-src ../src
+$ docker-compose up -d
+$ docker-compose exec php bash
+$ cd tests
+$ php -f tester ./ -C --coverage coverage.html --coverage-src ../src
 ```
 
 ## Minimum requirements
