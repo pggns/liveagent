@@ -827,46 +827,76 @@ class LiveAgentApi
 		return $this->sendRequest('GET', 'tags/' . $userId);
 	}
 
-	/**
-	 * @param string
-	 * @param string
-	 * @param array
-	 * @return \stdClass
-	 */
-	protected function sendRequest(string $method, string $type, array $data = []): \stdClass
-	{
-		$curl = curl_init();
+    /**
+     * Create file
+     * @param File $file
+     * @return \stdClass
+     */
+    public function createFile(File $file) : \stdClass
+    {
+        return $this->sendRequest('POST', 'files', $file->toArray());
+    }
 
-		$options = [
-			CURLOPT_RETURNTRANSFER => 1,
-			CURLOPT_URL => $this->apiUrl . '/' . $type . ($method == 'GET' ? '?' . http_build_query($data) : null),
-			CURLOPT_HTTPHEADER => [
-				'Content-Type: application/x-www-form-urlencoded',
-				'apikey: ' . $this->apiKey
-			],
-			CURLOPT_CUSTOMREQUEST => $method,
-			CURLOPT_POSTFIELDS => $method === 'GET' ? [] : json_encode($data),
-		];
-		curl_setopt_array($curl, $options);
+    /**
+     * @param string
+     * @param string
+     * @param array
+     * @return \stdClass
+     */
+    protected function sendRequest(string $method, string $type, array $data = []): \stdClass
+    {
+        $curl = curl_init();
 
-		if (($response = curl_exec($curl)) === false) {
-			throw new \RuntimeException(curl_error($curl), curl_errno($curl));
-		}
+        $options = [
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $this->apiUrl . '/' . $type . ($method == 'GET' ? '?' . http_build_query($data) : null),
+            CURLOPT_HTTPHEADER => array_merge($this->getCurlHeaderByType($type), ['apikey: ' . $this->apiKey]),
+            CURLOPT_CUSTOMREQUEST => $method,
+        ];
+        if ($type === 'files') {
+            $options[CURLOPT_POSTFIELDS] = $data;
+        } else {
+            $options[CURLOPT_POSTFIELDS] = $method === 'GET' ? [] : json_encode($data);
+        }
+        curl_setopt_array($curl, $options);
 
-		$json = (object)json_decode($response);
-		if (($error = json_last_error()) !== JSON_ERROR_NONE) {
-			throw new \RuntimeException('Invalid JSON response.', $error);
-		}
+        if (($response = curl_exec($curl)) === false) {
+            throw new \RuntimeException(curl_error($curl), curl_errno($curl));
+        }
 
-		if (($code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) !== 200) {
-			throw new \RuntimeException($json->message, $code);
-		}
+        $json = (object)json_decode($response);
+        if (($error = json_last_error()) !== JSON_ERROR_NONE) {
+            throw new \RuntimeException('Invalid JSON response.', $error);
+        }
 
-		if (isset($json->response->status) && $json->response->status == 'ERROR') {
-			throw new \RuntimeException($json->response->errormessage);
-		}
+        if (($code = curl_getinfo($curl, CURLINFO_HTTP_CODE)) !== 200) {
+            throw new \RuntimeException($json->message, $code);
+        }
 
-		curl_close($curl);
-		return (object)$json;
-	}
+        if (isset($json->response->status) && $json->response->status == 'ERROR') {
+            throw new \RuntimeException($json->response->errormessage);
+        }
+
+        curl_close($curl);
+        return (object)$json;
+    }
+
+    /**
+     * We need custom header for file uploads.
+     * @param string $type
+     * @return array
+     */
+    protected function getCurlHeaderByType(string $type) : array
+    {
+        $headers = [
+            'default' => [
+                'Content-Type: application/json',
+            ],
+            'files' => [
+                'Content-Type: multipart/form-data'
+            ]
+        ];
+
+        return $headers[$type] ?? $headers['default'];
+    }
 }
