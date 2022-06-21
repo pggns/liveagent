@@ -3,7 +3,7 @@
     "description": "Unofficial LiveAgent API v3 PHP Client",
     "license": "MIT",
     "keywords": ["liveagent", "API"],
-    "require": {
+    "require-dev": {
         "php": ">=7.1",
         "nette/tester": "2.0.1"
     },
