@@ -700,6 +700,14 @@ class LiveAgentApi {
     }
 
     /**
+     * Create tag
+     * @return \stdClass
+     */
+    public function createTag(Tag $tag): \stdClass {
+        return $this->sendRequest('POST', 'tags', $tag->toArray());
+    }
+
+    /**
      * Gets list of tickets
      * @param int Page to display. Not used if $from is defined.
      * @param int Results per page. Used only if $page is used.
