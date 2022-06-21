@@ -7,10 +7,14 @@ class LiveAgentApi {
     const TICKET_ATTRIBUTE_ENDCHAORCALL = 'endChatOrCall';
     const TICKET_ATTRIBUTE_NOTE = 'note';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $apiUrl;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $apiKey;
 
     /**
@@ -777,8 +781,7 @@ class LiveAgentApi {
      * @param File $file
      * @return \stdClass
      */
-    public function createFile(File $file) : \stdClass
-    {
+    public function createFile(File $file): \stdClass {
         return $this->sendRequest('POST', 'files', $file->toArray());
     }
 
@@ -788,8 +791,7 @@ class LiveAgentApi {
      * @param array
      * @return \stdClass
      */
-    protected function sendRequest(string $method, string $type, array $data = []): \stdClass
-    {
+    protected function sendRequest(string $method, string $type, array $data = []): \stdClass {
         $curl = curl_init();
 
         $options = [
@@ -831,8 +833,7 @@ class LiveAgentApi {
      * @param string $type
      * @return array
      */
-    protected function getCurlHeaderByType(string $type) : array
-    {
+    protected function getCurlHeaderByType(string $type): array {
         $headers = [
             'default' => [
                 'Content-Type: application/json',

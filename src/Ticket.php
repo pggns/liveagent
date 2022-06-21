@@ -14,52 +14,84 @@ class Ticket {
     const STATUS_NEW = 'N';
     const STATUS_POSTPONED = 'W';
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $subject;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $message;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $recipient;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $recipientName;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $userIdentifier;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $departmentId;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $attachments = [];
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $status = self::STATUS_INIT;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $cc;
 
-    /** @var \DateTime */
+    /**
+     * @var \DateTime
+     */
     protected $dateCreated;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $mailMessageId;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     protected $isHtmlMessage = true;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     protected $doNotSendEmail = true;
 
-    /** @var bool */
+    /**
+     * @var bool
+     */
     protected $useTemplate = true;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $customFields = [];
 
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $tags = [];
 
     /**

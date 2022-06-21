@@ -38,7 +38,7 @@ class File {
     /**
      * @return File
      */
-    protected function initDefaultValues() : self {
+    protected function initDefaultValues(): self {
         $this->extension = pathinfo($this->getPath(), PATHINFO_EXTENSION);
         $this->mimeType = mime_content_type($this->getPath());
         $this->name = pathinfo($this->getPath(), PATHINFO_BASENAME);
@@ -49,7 +49,7 @@ class File {
     /**
      * @return string
      */
-    public function getPath() : string {
+    public function getPath(): string {
         return $this->path;
     }
 
@@ -58,7 +58,7 @@ class File {
      *
      * @return File
      */
-    public function setPath(string $path) : self {
+    public function setPath(string $path): self {
         $this->path = $path;
 
         return $this;
@@ -67,7 +67,7 @@ class File {
     /**
      * @return string
      */
-    public function getExtension() : string {
+    public function getExtension(): string {
         return $this->extension;
     }
 
@@ -76,7 +76,7 @@ class File {
      *
      * @return File
      */
-    public function setExtension(string $extension) : self {
+    public function setExtension(string $extension): self {
         $this->extension = $extension;
 
         return $this;
@@ -85,7 +85,7 @@ class File {
     /**
      * @return string
      */
-    public function getMimeType() : string {
+    public function getMimeType(): string {
         return $this->mimeType;
     }
 
@@ -94,7 +94,7 @@ class File {
      *
      * @return File
      */
-    public function setMimeType(string $mimeType) : self {
+    public function setMimeType(string $mimeType): self {
         $this->mimeType = $mimeType;
 
         return $this;
@@ -103,7 +103,7 @@ class File {
     /**
      * @return string
      */
-    public function getName() : string {
+    public function getName(): string {
         return $this->name;
     }
 
@@ -112,7 +112,7 @@ class File {
      *
      * @return File
      */
-    public function setName(string $name) : self {
+    public function setName(string $name): self {
         $this->name = $name;
 
         return $this;
@@ -121,7 +121,7 @@ class File {
     /**
      * @return array
      */
-    public function toArray() : array {
+    public function toArray(): array {
         return [
             'file' => new \CURLFile($this->getPath(), $this->getMimeType(), $this->getName()),
         ];
