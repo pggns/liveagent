@@ -4,7 +4,7 @@ use Tester\Assert;
 
 require __DIR__ . '/bootstrap.php';
 
-$ticket = new QualityUnit\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org', '12345678');
+$ticket = new Pggns\LiveAgent\Ticket('Test API', 'This is a testing message.', 'recipient@example.org', 'user@example.org', '12345678');
 
 // required params
 Assert::same('Test API', $ticket->getSubject());

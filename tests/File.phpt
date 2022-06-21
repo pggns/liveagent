@@ -8,13 +8,13 @@ require __DIR__ . '/bootstrap.php';
  * Check construct exception
  */
 Assert::exception(static function () {
-    new QualityUnit\File('example');
+    new Pggns\LiveAgent\File('example');
 }, RuntimeException::class);
 
 /**
  * Check getters
  */
-$file = new QualityUnit\File(__DIR__ . '/source/test_file.txt');
+$file = new Pggns\LiveAgent\File(__DIR__ . '/source/test_file.txt');
 Assert::same(__DIR__ . '/source/test_file.txt', $file->getPath());
 Assert::same('test_file.txt', $file->getName());
 Assert::same('txt', $file->getExtension());
@@ -27,7 +27,7 @@ unset($file);
 /**
  * Check setters
  */
-$file = new QualityUnit\File(__DIR__ . '/source/test_file.txt');
+$file = new Pggns\LiveAgent\File(__DIR__ . '/source/test_file.txt');
 $file->setPath('example/path/test_file.txt');
 Assert::same('example/path/test_file.txt', $file->getPath());
 $file->setExtension('png');
