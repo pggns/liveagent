@@ -1,31 +1,31 @@
 {
-  "name": "pggns/liveagent",
-  "description": "Unofficial LiveAgent API v3 PHP Client",
-  "license": "MIT",
-  "keywords": ["liveagent", "API"],
-  "require": {
-      "php": ">=7.1",
-      "nette/tester": "2.0.1"
-  },
-  "autoload": {
-      "psr-4": {
-          "Pggns\\LiveAgent\\": "src"
-      }
-  },
-  "authors": [
-      {
-          "name": "Pavol Biely",
-          "email": "pavolbiely@gmail.com",
-          "role": "Developer"
-      }
-      {
-          "name": "pggns",
-          "email": "projects@pggns.de",
-          "role": "Developer"
-      }
-  ],
-  "support": {
-      "source": "https://github.com/pggns/liveagent",
-  "issues": "https://github.com/pggns/liveagent/issues"
-  }
+    "name": "pggns/liveagent",
+    "description": "Unofficial LiveAgent API v3 PHP Client",
+    "license": "MIT",
+    "keywords": ["liveagent", "API"],
+    "require": {
+        "php": ">=7.1",
+        "nette/tester": "2.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pggns\\LiveAgent\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pavol Biely",
+            "email": "pavolbiely@gmail.com",
+            "role": "Developer"
+        },
+        {
+            "name": "pggns",
+            "email": "projects@pggns.de",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/pggns/liveagent",
+        "issues": "https://github.com/pggns/liveagent/issues"
+    }
 }
